@@ -3,23 +3,29 @@ import { useFlashcards } from '../FlashcardContext';
 import './Sidebar.css';
 
 const Sidebar = ({ isOpen }) => {
+  // 從 FlashcardContext 中獲取必要的狀態和函數
   const { topics, currentTopic, setCurrentTopic, addTopic, deleteTopic } = useFlashcards();
+  
+  // 用於新主題輸入的本地狀態
   const [newTopic, setNewTopic] = useState('');
 
+  // 處理添加新主題
   const handleAddTopic = (e) => {
     e.preventDefault();
     if (newTopic.trim()) {
       addTopic(newTopic.trim());
-      setNewTopic('');
+      setNewTopic(''); // 清空輸入框
     }
   };
 
+  // 處理刪除主題
   const handleDeleteTopic = (topic) => {
     if (window.confirm(`確定要刪除 "${topic}" 分類嗎？這將刪除該分類下的所有卡片。`)) {
       deleteTopic(topic);
     }
   };
 
+  // 處理主題切換
   const handleTopicChange = (topic) => {
     console.log('Changing topic to:', topic);
     setCurrentTopic(topic);
@@ -34,6 +40,7 @@ const Sidebar = ({ isOpen }) => {
             <button onClick={() => handleTopicChange(topic)}>
               {topic}
             </button>
+            {/* 只有當有多於一個主題時才顯示刪除按鈕 */}
             {topics.length > 1 && (
               <button
                 onClick={() => handleDeleteTopic(topic)}
@@ -46,6 +53,7 @@ const Sidebar = ({ isOpen }) => {
           </li>
         ))}
       </ul>
+      {/* 添加新主題的表單 */}
       <form onSubmit={handleAddTopic} className="add-topic-form">
         <input
           type="text"

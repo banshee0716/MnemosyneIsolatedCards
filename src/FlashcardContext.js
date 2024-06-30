@@ -1,24 +1,29 @@
 import React, { createContext, useState, useEffect, useContext } from "react";
 import { initialCards } from "./initialCards";
 
+// 創建 FlashcardContext
 const FlashcardContext = createContext();
 
 export const FlashcardProvider = ({ children }) => {
+  // 從本地存儲或初始數據中獲取卡片數據
   const [cards, setCards] = useState(() => {
     const savedCards = localStorage.getItem("flashcards");
     return savedCards ? JSON.parse(savedCards) : initialCards;
   });
 
+  // 從本地存儲或初始數據中獲取主題列表
   const [topics, setTopics] = useState(() => {
     const savedTopics = localStorage.getItem("topics");
     return savedTopics ? JSON.parse(savedTopics) : Object.keys(initialCards);
   });
 
+  // 從本地存儲或初始數據中獲取當前主題
   const [currentTopic, setCurrentTopic] = useState(() => {
     const savedTopic = localStorage.getItem("currentTopic");
     return savedTopic || Object.keys(initialCards)[0];
   });
 
+  // 如果卡片數據為空，重置為初始狀態
   useEffect(() => {
     if (Object.keys(cards).length === 0) {
       setCards(initialCards);
@@ -27,12 +32,14 @@ export const FlashcardProvider = ({ children }) => {
     }
   }, [cards]);
 
+  // 當卡片、主題或當前主題改變時，更新本地存儲
   useEffect(() => {
     localStorage.setItem("flashcards", JSON.stringify(cards));
     localStorage.setItem("topics", JSON.stringify(topics));
     localStorage.setItem("currentTopic", currentTopic);
   }, [cards, topics, currentTopic]);
 
+  // 添加新卡片
   const addCard = (topic, newCard) => {
     if (!newCard.front || !newCard.front.title) {
       console.error("Invalid card structure");
@@ -44,6 +51,7 @@ export const FlashcardProvider = ({ children }) => {
     }));
   };
 
+  // 刪除卡片
   const deleteCard = (topic, index) => {
     setCards((prevCards) => ({
       ...prevCards,
@@ -51,6 +59,7 @@ export const FlashcardProvider = ({ children }) => {
     }));
   };
 
+  // 添加新主題
   const addTopic = (newTopic) => {
     if (!topics.includes(newTopic)) {
       setTopics((prevTopics) => [...prevTopics, newTopic]);
@@ -62,6 +71,7 @@ export const FlashcardProvider = ({ children }) => {
     }
   };
 
+  // 刪除主題
   const deleteTopic = (topicToDelete) => {
     if (topics.length > 1) {
       setTopics((prevTopics) =>
@@ -77,6 +87,7 @@ export const FlashcardProvider = ({ children }) => {
     }
   };
 
+  // 重置為初始狀態
   const resetToInitialState = () => {
     setCards(initialCards);
     setTopics(Object.keys(initialCards));
@@ -86,6 +97,7 @@ export const FlashcardProvider = ({ children }) => {
     localStorage.removeItem("currentTopic");
   };
 
+  // 提供給子組件的值
   const value = {
     cards,
     setCards,
@@ -107,6 +119,7 @@ export const FlashcardProvider = ({ children }) => {
   );
 };
 
+// 自定義 hook 用於在其他組件中使用 FlashcardContext
 export const useFlashcards = () => {
   const context = useContext(FlashcardContext);
   if (!context) {

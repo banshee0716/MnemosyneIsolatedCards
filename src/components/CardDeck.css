@@ -18,6 +18,8 @@
   margin-bottom: 20px;
   perspective: 1000px;
   overflow: hidden;
+  user-select: none;
+  touch-action: pan-y;
 }
 
 .card-wrapper {
@@ -25,9 +27,13 @@
   width: 100%;
   max-width: 600px;
   height: 400px;
-  transition: all 0.5s ease;
+  transition: all 0.3s ease;
+  cursor: grab;
 }
 
+.card-wrapper:active {
+  cursor: grabbing;
+}
 .current-card {
   z-index: 3;
   transform: translateX(0) scale(1);
@@ -47,11 +53,11 @@
 
 /* 動畫效果 */
 .card-deck.left .current-card {
-  animation: slideLeft 0.5s forwards;
+  animation: slideLeft 0.3s forwards;
 }
 
 .card-deck.right .current-card {
-  animation: slideRight 0.5s forwards;
+  animation: slideRight 0.3s forwards;
 }
 
 @keyframes slideLeft {
@@ -198,4 +204,55 @@
 /* 如果你想在黑暗模式下調整顏色 */
 .dark-mode .keyboard-instructions {
   color: #aaa;
+}
+
+@media (min-width: 768px) and (max-width: 1024px) {
+  .card-deck {
+    height: 400px;
+  }
+
+  .card-wrapper {
+    max-width: 500px;
+    height: 350px;
+  }
+
+  .nav-button {
+    font-size: 42px;
+    padding: 15px;
+  }
+
+  .card-count {
+    font-size: 1.2rem;
+  }
+
+  .action-btn {
+    font-size: 1.1rem;
+    padding: 12px 24px;
+  }
+
+  .keyboard-instructions {
+    font-size: 1rem;
+  }
+}
+
+/* 橫向平板樣式 */
+@media (min-width: 1024px) and (max-width: 1366px) and (orientation: landscape) {
+  .card-deck {
+    height: 450px;
+  }
+
+  .card-wrapper {
+    max-width: 600px;
+    height: 400px;
+  }
+
+  .button-group {
+    flex-direction: row;
+    justify-content: center;
+  }
+
+  .action-btn {
+    width: auto;
+    margin: 0 10px;
+  }
 }
