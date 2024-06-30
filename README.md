@@ -1,6 +1,6 @@
 # 認知負荷理論導向的卡片式學習應用
 
-這是一個基於認知負荷理論（Cognitive Load Theory）和元素隔離效應（Isolate Elements Effect）開發的交互式學習應用程序。本應用旨在通過優化信息呈現方式，提高學習效率和知識保留率。
+這是一個基於認知負荷理論（Cognitive Load Theory）和獨立元素效應（Isolate Elements Effect）開發的互動式學習應用程序。本應用旨在通過優化信息呈現方式，提高學習效率和知識保留率。
 
 ## 理論基礎
 
@@ -29,7 +29,7 @@
 
 ## 功能特點
 
-- 主題式卡片群組：用戶可以創建和管理不同學習主題的卡片群組。
+- 主題式卡片群組：使用者可以創建和管理不同學習主題的卡片群組。
 - 漸進式學習路徑：按照認知負荷理論設計的學習順序。
 - 元認知提示系統：促進深度學習和知識整合。
 - 交互式卡片界面：支持卡片翻轉、左右滑動切換。
@@ -82,11 +82,11 @@
 
 1. 克隆儲存庫：
    ```
-   git clone https://github.com/NTNU_idiot/cognitive-load-card-app.git
+   git clone https://github.com/banshee0716/MnemosyneIsolatedCards.git
    ```
 2. 進入項目目錄：
    ```
-   cd cognitive-load-card-app
+   cd MnemosyneIsolatedCards
    ```
 3. 安裝依賴：
    ```
@@ -110,7 +110,7 @@
 我們歡迎社區成員的貢獻，特別是在以下方面：
 - 改進卡片設計以更好地符合認知負荷理論
 - 擴展學習主題和內容
-- 優化用戶界面和體驗
+- 優化使用者界面和體驗
 - 添加新的學習輔助功能
 
 請提交問題和拉取請求。對於重大變更，請先開 issue 討論您想要改變的內容。
